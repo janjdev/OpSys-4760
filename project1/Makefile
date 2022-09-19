@@ -2,15 +2,15 @@ PROJ1	= proj1
 PROJ1_OBJ = proj1.o
 OUTPUT	= $(PROJ1)
 
-.SUFFIXES: .cpp .o
+.SUFFIXES: .c .o
 
 all: $(OUTPUT)
 
 $(PROJ1): $(PROJ1_OBJ)
-	g++ -Wall -g -o $@ $(PROJ1_OBJ)
+	gcc -ggdb -g -o $@ $(PROJ1_OBJ)
 
-.cpp.o:
-	g++ -Wall -g -c $<
+.c.o:
+	gcc -ggdb -g -c $<
 
 .PHONY: clean
 clean:
