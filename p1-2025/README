@@ -1,0 +1,46 @@
+# README
+
+## Project Description
+
+This project is comprised of two executables: `oss` and `user`. The `oss` process launches a number of `user` processes based on the command-line parameters. The `user` process performs tasks in a loop and outputs its PID, parent PID, and iteration count before and after sleeping for one second.
+
+## Compilation
+
+To compile, run:\
+```make```
+
+This generates the `oss` and `user` executables.
+
+## Run the Project
+
+### Help
+
+For help running the project, enter:\
+```./oss -h```\
+This will output a help menu with parameter definitions and input example.
+
+### Run the main process (oss)
+
+To run `oss` with parameters:
+
+```./oss -n <proc> -s <simul> -t <iter>```
+
+Parameters:
+
+-n `<proc>` total number of `user` processes.
+-s `<simul>` maximum number of processes to run simultaneously.
+-t `<iter>` the number of iterations each `user` process will perform.
+
+Example usage:
+
+./oss -n 5 -s 3 -t 7\
+This launches `5` user processes, allowing only `3` to run simultaneously, with each performing `7` iterations.
+
+## Known Issues
+
+- None reported at this time.
+
+## Troubleshooting
+
+If the program does not compile, ensure `gcc` is installed and available in your system's PATH.
+
