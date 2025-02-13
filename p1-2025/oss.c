@@ -1,7 +1,7 @@
 /*
 Author: January Johnson
 Date: 2/13/2025
-Purpose: The program simulates a parent process (`oss`) controlling several child processes (`user`).  
+Purpose: In this program, the parent process (`oss`) controls one or more child processes (`user`).  
 Each `user` process prints its details, waits one second, and repeats for a specified number of times.  The `oss` process creates and
 manages the `user` processes, making sure only a certain number run at once.  It waits for a process to
 finish before starting another.  
