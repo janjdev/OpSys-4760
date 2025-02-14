@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h> 
 
 #include "proj1.h"
 
@@ -24,6 +25,8 @@ int main(int argc, char* argv[]){
         return 1;
     }
 
+    setbuf(stdout, NULL);
+
     // Get the number of iterations from the command line.
     int iterations = atoi(argv[1]);
 
@@ -34,10 +37,12 @@ int main(int argc, char* argv[]){
     // Print the process details and sleep for one second for the given number of iterations.
     for (int i = 0; i < iterations; i++) {
         printf("USER PID: %d, PPID: %d, Iterations: %d Before sleeping.\n", child_id, parent_id, iterations);
+        fflush(stdout);
         sleep(1);
         printf("USER PID: %d, PPID: %d, Iterations: %d After sleeping.\n", child_id, parent_id, iterations);
-        sleep(1);
+        fflush(stdout);
     }
+
 
     return 0;
 

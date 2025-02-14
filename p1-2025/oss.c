@@ -17,17 +17,23 @@ finish before starting another.
 
 int main(int argc, char* argv[])
 {
-    /* Variable to store command-line options */
+    // Variable to store command-line options
     int opt;
 
-    /* Number of processes to create */
+    // Number of processes to create
     int processes;
 
-    /* Number of simultaneous processes to run */
+    // Number of simultaneous processes to run
     int simultaneous;
 
-    /* Number of iterations for each process */
+    // Number of iterations for each process
     int iterations;
+
+    // Number of launched processes
+    int launched = 0;
+
+    // Number of active processes
+    int active = 0;
 
 
     //Get and parse command line options.
@@ -94,31 +100,48 @@ int main(int argc, char* argv[])
     }
 
     // Create the specified number of processes.
-    for (int i = 0; i < processes; i++) {
-        // If the maximum number of processes are running, wait for one to finish.
-        if (i % simultaneous == 0) {
-            wait(NULL);
-        }
+    while (launched < processes ) {
 
-        // Fork a new process.
-        pid_t pid = fork();
+        // If the number of active processes < the number of simultaneous processes, continue.
+        if (active < simultaneous) {
 
-        // If the fork fails, print an error message and exit.
-        if (pid < 0) {
-            perror("fork");
-            exit(EXIT_FAILURE);
-        }
+            // Fork a new process.
+            pid_t pid = fork();
 
-        // If the fork is successful, execute the user program.
-        if (pid == 0) {
-            char iterations_str[10];
-            sprintf(iterations_str, "%d", iterations);
-            execl("./user", "./user", iterations_str, NULL);
+            // If the fork fails, print an error message and exit.
+            if (pid < 0) {
+                perror("fork");
+                exit(EXIT_FAILURE);
+            }
+            // If the fork is successful, execute the user program.
+            if (pid == 0) {
+                
+                // Create a char var to pass the number of iterations to the user 
+                char iterations_str[10];
+                sprintf(iterations_str, "%d", iterations);
+
+                // Run the user main function and pass the iteration string.
+                execl("./user", "./user", iterations_str, NULL);
+                perror("execl");  // If execl fails
+                exit(EXIT_FAILURE);
+
+            }
+             // Increment the number of active processes and launched processes.
+            launched++;
+            active++;
         }
+        if (active >= simultaneous) {
+            // Wait for a child process to finish to free up a slot for a new process.
+            int status;
+            pid_t finished_pid = wait(&status);
+            if (finished_pid > 0) {
+                active--;  // Reduce active process count
+            }
+        }
+        
     }
 
-
-return 0;
+    return 0;
     
    
 }
