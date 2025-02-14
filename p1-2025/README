@@ -38,7 +38,7 @@ This launches `5` user processes, allowing only `3` to run simultaneously, with 
 
 ## Known Issues
 
-- Struggled to get my oss process to terminate correctly. A known solution is to use two while loops. I'm striving for a more optimized solution but time is short.
+- Struggled to get my oss process to terminate correctly. A known solution is to use two while loops. I'm striving for a more optimized solution but time is short. I still needed two while loops to make sure the oss program terminated after all chid processes completed.
 
 ## Troubleshooting
 

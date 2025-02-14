@@ -141,7 +141,13 @@ int main(int argc, char* argv[])
         
     }
 
-    return 0;
-    
+    while (active > 0) {
+        // Wait for all child processes to finish.
+        int status;
+        pid_t finished_pid = wait(&status);
+        if (finished_pid > 0) {
+            active--;  // Reduce active process count
+        }
+    }    
    
 }
