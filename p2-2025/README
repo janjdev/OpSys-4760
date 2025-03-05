@@ -1,0 +1,61 @@
+# README
+
+## Project Description
+This project implements a simulated clock system using shared memory and forked worker processes in C. The system consists of:
+- `oss.c`: The main process that manages the simulated clock and launches worker processes.
+- `worker.c`: Worker processes that terminate based on simulated clock time.
+
+## Features
+- A simulated clock that increments in logical time.
+- Worker processes that periodically checks 
+- Graceful signal handling to terminate processes cleanly.
+
+## Compilation
+
+To compile, run:\
+```make```
+
+This generates the `oss` and `worker` executables.
+
+## Run the Project
+
+### Help
+
+For help running the project, enter:\
+```./oss -h```\
+This will output a help menu with parameter definitions and input example.
+
+### Run the main process (oss)
+
+To run `oss` with parameters:
+
+```./oss -n <proc> -s <simul> -t <time>` -i <interval>``
+
+Parameters:
+
+| Argument |  Description |
+| --------- | ------------- |
+| -h |	Show help and exit |
+| -n proc  |	Maximum number of child processes |
+| -s simul |	Max simultaneous child processes |
+| -t time  |	Upper bound for child runtime (1 to maxTime seconds + random nanoseconds) |
+| -i interval |	Interval in milliseconds to spawn workers |
+
+
+
+Example usage:
+
+./oss -n 10 -s 3 -t 5 -i 100
+#### This will:
+
+- Launch 10 worker processes in total.
+- Run at most 3 processes at the same time.
+- Each child will run between 1 second and 5 seconds + random nanoseconds.
+- No child will be launched more frequently than every 100 milliseconds
+
+## Known Issues
+
+
+## Troubleshooting
+
+If the program does not compile, ensure `gcc` is installed and available in your system's PATH.
