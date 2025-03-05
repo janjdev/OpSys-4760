@@ -5,8 +5,8 @@ Purpose: In this program, the parent process (`oss`) manages a simulated system 
 that manages child processes using a simulated system clock and Process Control Blocks (PCBs).
 It controls the creation, execution, and termination of child processes while enforcing user-defined
 constraints on the number of processes, runtime limits, and launch intervals. 
-Example: ./oss -n 5 -s 2 -t 10
-In this example, the program will launch 5 `user` processes, run 2 processes at a time, each process will
+Example: ./oss -n 5 -s 2 -t 10 -i 100
+In this example, the program will launch 5 `worker` processes, run 2 processes at a time, each process will
 run between 1 and 10 seconds with a 100 nanoseconds between each process launch.
 */
 
